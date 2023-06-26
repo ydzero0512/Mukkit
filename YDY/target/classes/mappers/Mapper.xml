@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ydy.mapper.RestMapper">
+  	
+	<select id="getList" resultType="RestVO">
+		SELECT * FROM restaurant
+	</select>
+	
+  	<!-- 글쓰기 -->
+  	
+  	<insert id="create">
+  		INSERT INTO restaurant
+  		VALUES (null,#{rest_name},#{address_road},#{address},#{city},#{lat},#{lng},#{fav},#{visit},#{memo},#{file_1},#{file_2})
+  	
+  	</insert>
+  	<!-- 글쓰기 -->
+  	
+
+  </mapper>
