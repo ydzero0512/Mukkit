@@ -9,14 +9,28 @@
 		SELECT * FROM restaurant
 	</select>
 	
+	<!-- 특정글 정보  -->
+	<select id="getRead" resultType="RestVO">
+		SELECT * FROM restaurant 
+		WHERE rest_id = #{rest_id}
+	</select>
+	<!-- 특정글 정보  -->
+	
   	<!-- 글쓰기 -->
   	
   	<insert id="create">
   		INSERT INTO restaurant
-  		VALUES (null,#{rest_name},#{address_road},#{address},#{city},#{lat},#{lng},#{fav},#{visit},#{memo},#{ori_name},#{change_name})
+  		VALUES (null,#{rest_name},#{address_road},#{address},#{city},#{lat},#{lng},#{fav},#{visit},#{memo},#{file_name})
   	
   	</insert>
   	<!-- 글쓰기 -->
+  	
+  	<!-- 글삭제  -->
+  	<delete id="deleteList">
+  		DELETE FROM restaurant
+  		WHERE rest_id = #{rest_id}
+  	</delete>
+  	<!-- 글삭제  -->
   	
 
   	

@@ -16,8 +16,9 @@ public class RestVO {
     private int fav;
     private int visit;
     private String memo;
-    private String ori_name;
-    private String change_name;
+    private String file_name;
+    private MultipartFile upload;
+    
 	public int getRest_id() {
 		return rest_id;
 	}
@@ -78,27 +79,34 @@ public class RestVO {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-
-
-	public String getOri_name() {
-		return ori_name;
+	public String getFile_name() {
+		return file_name;
 	}
-	public void setOri_name(String ori_name) {
-		this.ori_name = ori_name;
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
-	public String getChange_name() {
-		return change_name;
+	public MultipartFile getUpload() {
+		return upload;
 	}
-	public void setChange_name(String change_name) {
-		this.change_name = change_name;
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
 	}
 	@Override
 	public String toString() {
 		return "RestVO [rest_id=" + rest_id + ", rest_name=" + rest_name + ", address_road=" + address_road
 				+ ", address=" + address + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", fav=" + fav
-				+ ", visit=" + visit + ", memo=" + memo + ", ori_name=" + ori_name + ", change_name=" + change_name
+				+ ", visit=" + visit + ", memo=" + memo + ", file_name=" + file_name + ", upload=" + upload
+				+ ", getRest_id()=" + getRest_id() + ", getRest_name()=" + getRest_name() + ", getAddress_road()="
+				+ getAddress_road() + ", getAddress()=" + getAddress() + ", getCity()=" + getCity() + ", getLat()="
+				+ getLat() + ", getLng()=" + getLng() + ", getFav()=" + getFav() + ", getVisit()=" + getVisit()
+				+ ", getMemo()=" + getMemo() + ", getFile_name()=" + getFile_name() + ", getUpload()=" + getUpload()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
+
+
+
+
 
 
 	

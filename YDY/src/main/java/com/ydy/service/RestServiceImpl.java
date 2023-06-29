@@ -25,8 +25,20 @@ public class RestServiceImpl implements RestService{
 
 	@Override
 	public List<RestVO> selectRest() throws Exception {
-		// TODO Auto-generated method stub
+	
 		return rdao.selectRest();
+	}
+
+	@Override
+	public RestVO selectRead(String rest_id) throws Exception {
+	
+		return rdao.selectRead(rest_id);
+	}
+
+	@Override
+	public void deleteList(String rest_id) throws Exception {
+		rdao.deleteList(rest_id);
+		
 	}
 
 

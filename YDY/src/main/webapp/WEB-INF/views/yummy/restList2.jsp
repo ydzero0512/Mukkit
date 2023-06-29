@@ -10,6 +10,8 @@
 <style type="text/css">
 tr{padding-bottom: 10px;}
 td{height: 50px;vertical-align: middle;}
+.check{transform: scale(1.3);}
+tr{cursor: pointer;}
 </style>
 </head>
 <body>
@@ -20,7 +22,7 @@ td{height: 50px;vertical-align: middle;}
 	<table class="table table-hover" style="">
 	  <thead>
 	  <tr>
-	  	<th><input type="checkbox"></th>	
+	  	<th><input type="checkbox" class="check" onclick="selectAll(this);"></th>	
 	   	<th>지역</th>
 	   	<th>가게명</th>
 	   	<th>주소</th>
@@ -31,8 +33,8 @@ td{height: 50px;vertical-align: middle;}
 	  </thead>
 	
 	  <c:forEach var="vo" items="${restList}">
-	  <tr>
-	  	<td><input type="checkbox"></td>	
+	  <tr onclick="location.href='/yummy/restRead?rest_id=${vo.rest_id}'">
+	  	<td><input type="checkbox" class="check" name="rowCheck" value="${vo.rest_id }" onclick="event.stopPropagation();"></td>	
 	   	<td>${vo.city }</td>
 	   	<td>${vo.rest_name }</td>
 	   	<td>${vo.address_road }</td>
@@ -52,6 +54,79 @@ td{height: 50px;vertical-align: middle;}
 	  </c:forEach>
 	
 	</table>
+	<input type="button" class="btn btn-danger" onclick="deleteList();" value="삭제">
+	
+	<script type="text/javascript">
+	 function selectAll(selectAll)  {
+		  const checkboxes 
+		       = document.getElementsByName('rowCheck');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
+		}
+	 
+	 
+	 function deleteList() {
+		var valArr = new Array();
+		var list = $("input[name='rowCheck']");
+		
+		for(var i=0; i<list.length;i++){
+			if(list[i].checked){
+			valArr.push(list[i].value);
+		  }	
+		}
+
+		if(valArr.length == 0){
+	    	Swal.fire("선택된 목록이 없습니다.")
+	     
+		}else{
+	      	Swal.fire({
+	            title: "목록을 삭제하겠습니까?",
+	            text: "선택된 목록 수 :"+valArr.length,
+				icon: "warning",
+	              
+	           	   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	           	   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	           	   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	           	   confirmButtonText: '예', // confirm 버튼 텍스트 지정
+	           	   cancelButtonText: '아니오', // cancel 버튼 텍스트 지정
+	           	   
+	            }).then(result => {
+	                if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	          		  $.ajax({
+	    				  url : "/yummy/deleteList",
+	    				  type : 'POST',
+	    				  traditional : true,
+	    				  data: {
+	    					  valArr : valArr
+	    				  },
+	    				  success:function(){
+	    						 Swal.fire({
+	    				                title: "삭제가 완료되었습니다.",
+	    				                text: "",
+	    				                icon: "success"
+	    				              }).then(function() {
+	    				            	  location.reload()
+	    				              
+	    				              });
+	    					 
+	    					 
+	    					  
+	    				  }//success 
+	    			  });// ajax
+	            	    
+	                } else if (result.isDismissed) { // 만약 모달창에서 cancel 버튼을 눌렀다면
+	                	// ...실행
+	                }
+	            });
+			
+		}
+	}// 입고취소
+	
+	
+	</script>
+	
 </div>	
 </body>
 </html>

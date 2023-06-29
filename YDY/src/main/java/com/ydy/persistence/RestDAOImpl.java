@@ -35,6 +35,19 @@ public class RestDAOImpl implements RestDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE+".getList");
 	}
+
+	@Override
+	public RestVO selectRead(String rest_id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+".getRead",rest_id);
+	}
+
+	@Override
+	public void deleteList(String rest_id) throws Exception {
+		logger.debug("deleteList(String rest_id) 호출!");
+		sqlSession.delete(NAMESPACE+".deleteList",rest_id);
+		
+	}
 	
 
 	 

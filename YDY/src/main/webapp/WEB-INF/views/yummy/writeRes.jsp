@@ -24,7 +24,7 @@
 <div class="container mt-3" style=" border-radius: 0 0 40px 0;width: 60%; border: 5px solid;background: white;	padding:40px;">
 
   
-  <form action=""method="post">
+  <form action=""method="post"enctype="multipart/form-data">
   <input type="hidden" id="lng" name="lng">
   <input type="hidden" id="lat" name="lat">
   <input type="hidden" id="address" name="address" class="form-control">
@@ -34,9 +34,8 @@
   <input type="text" id="rest_name" name="rest_name" class="form-control" readonly="readonly" placeholder="클릭시 검색이 가능합니다." data-bs-toggle="modal" data-bs-target="#myModal">
   <input type="text" id="address_road" name="address_road" class="form-control" readonly="readonly" placeholder="도로명 주소(검색시 자동입력)">
 
-  <textarea rows="" cols=""class="form-control" name="memo"></textarea>
-  <input type="file" name="ori_name" class="form-control">
-  <input type="file" name="file_2" class="form-control">
+  <textarea rows="" cols=""class="form-control" name="memo" placeholder="필요한 메모를 작성해주세요."></textarea>
+  <input type="file" name="upload" class="form-control">
   <h5><label for="visit" style="color: gray;"><input type="checkbox" value="1" name="visit" id="visit">방문했던 곳이예요.</label></h5>
    <div>별점매기기</div>
   <input class="btn btn-primary" type="submit" value="등록하기">

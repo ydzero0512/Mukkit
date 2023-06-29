@@ -2,15 +2,19 @@ package com.ydy.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,32 +64,18 @@ public class BoardController {
 	
 	//	글쓰기 - http://localhost:8088/yummy/writeRes (GET)
 	@RequestMapping(value = "/writeRes", method = RequestMethod.POST)
-	public void writeResPOST(RestVO vo) throws Exception{
-		/*
-		 * if(!upload.getOriginalFilename().equals("")) { // 파일명 수정 작업 후 서버에 업로드
-		 * ("flower.png" => "20220118103646521.png")
-		 * 
-		 * String originName = upload.getOriginalFilename(); // "flower.png"
-		 * 
-		 * String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new
-		 * Date()); // "202201181036" int ranNum = (int)(Math.random() * 90000 + 10000);
-		 * // 46521 (5자리랜덤값) String ext =
-		 * originName.substring(originName.lastIndexOf(".")); // ".png"
-		 * 
-		 * String changeName = currentTime + ranNum + ext;
-		 * 
-		 * // 업로드한 파일을 보관할 폴더의 물리적인 경로 알아내어 파일을 changeName의 이름으로 저장 // 물리적인 경로는 세션객체를 먼저
-		 * 얻어내서 겟리얼패스메소드까지 호출 String savePath =
-		 * session.getServletContext().getRealPath("/resources/photo/");
-		 * 
-		 * try { upload.transferTo(new File(savePath + changeName)); } catch
-		 * (IllegalStateException | IOException e) { e.printStackTrace(); }
-		 * 
-		 * vo.setOri_name(originName);
-		 * vo.setChange_name("/resources/photo/"+changeName);
-		 * 
-		 * }
-		 */
+	public String writeResPOST(RestVO vo) throws Exception{
+		// 파일 업로드 처리
+		String file_name=null;
+		MultipartFile upload = vo.getUpload();
+		if (!upload.isEmpty()) {
+			String originalFileName = upload.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+			UUID uuid = UUID.randomUUID();	//UUID 구하기
+			file_name=uuid+"."+ext;
+			upload.transferTo(new File("C:\\Users\\ydyd0\\git\\Mukkit\\YDY\\src\\main\\webapp\\resources\\photo\\"+file_name));
+		}
+		vo.setFile_name(file_name);
 		
 		logger.debug(" insertResPOST()호출!");
 		logger.info("vo:"+vo);
@@ -95,7 +85,7 @@ public class BoardController {
 		
 		logger.debug(" /yummy/restList.jsp페이지이동");
 		
-
+		return "redirect:/yummy/restList2";
 		
 	}
 	
@@ -112,7 +102,27 @@ public class BoardController {
 	    List<RestVO> restList = service.selectRest();
 	    model.addAttribute("restList",restList);
 	}
-
+	
+	@RequestMapping(value = "/restRead", method = RequestMethod.GET)
+	public void restReadGET(@RequestParam("rest_id") String rest_id,Model model) throws Exception {
+	    logger.debug("restReadGET() 호출!");
+	   
+	    model.addAttribute("vo", service.selectRead(rest_id));
+	}
+	
+	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
+	public String deleteListPOST(HttpServletRequest req) throws Exception {
+		 logger.debug("@@@@@deletePOST() 호출!");
+		String[] idArr = req.getParameterValues("valArr");
+		
+		for(int i=0;i<idArr.length;i++) {
+			service.deleteList(idArr[i]);
+			logger.debug("입고취소 완료 : "+idArr[i]);
+		}
+		return "redirect:/yummy/restList2";
+		
+	}
+	
 	
 	 
 }

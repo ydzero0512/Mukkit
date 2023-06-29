@@ -14,7 +14,7 @@
           <a class="nav-link" href="/yummy/restList">MAP</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)">리스트보기</a>
+          <a class="nav-link" href="/yummy/restList2">리스트보기</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/yummy/writeRes">리스트저장</a>
