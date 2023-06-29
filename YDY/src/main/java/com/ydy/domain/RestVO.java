@@ -1,5 +1,7 @@
 package com.ydy.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 
@@ -14,8 +16,8 @@ public class RestVO {
     private int fav;
     private int visit;
     private String memo;
-    private String file_1;
-    private String file_2;
+    private String ori_name;
+    private String change_name;
 	public int getRest_id() {
 		return rest_id;
 	}
@@ -76,30 +78,28 @@ public class RestVO {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public String getFile_1() {
-		return file_1;
+
+
+	public String getOri_name() {
+		return ori_name;
 	}
-	public void setFile_1(String file_1) {
-		this.file_1 = file_1;
+	public void setOri_name(String ori_name) {
+		this.ori_name = ori_name;
 	}
-	public String getFile_2() {
-		return file_2;
+	public String getChange_name() {
+		return change_name;
 	}
-	public void setFile_2(String file_2) {
-		this.file_2 = file_2;
+	public void setChange_name(String change_name) {
+		this.change_name = change_name;
 	}
 	@Override
 	public String toString() {
 		return "RestVO [rest_id=" + rest_id + ", rest_name=" + rest_name + ", address_road=" + address_road
 				+ ", address=" + address + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", fav=" + fav
-				+ ", visit=" + visit + ", memo=" + memo + ", file_1=" + file_1 + ", file_2=" + file_2
-				+ ", getRest_id()=" + getRest_id() + ", getRest_name()=" + getRest_name() + ", getAddress_road()="
-				+ getAddress_road() + ", getAddress()=" + getAddress() + ", getCity()=" + getCity() + ", getLat()="
-				+ getLat() + ", getLng()=" + getLng() + ", getFav()=" + getFav() + ", getVisit()=" + getVisit()
-				+ ", getMemo()=" + getMemo() + ", getFile_1()=" + getFile_1() + ", getFile_2()=" + getFile_2()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ ", visit=" + visit + ", memo=" + memo + ", ori_name=" + ori_name + ", change_name=" + change_name
 				+ "]";
 	}
+
 
 	
 }

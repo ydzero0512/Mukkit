@@ -35,7 +35,7 @@
   <input type="text" id="address_road" name="address_road" class="form-control" readonly="readonly" placeholder="도로명 주소(검색시 자동입력)">
 
   <textarea rows="" cols=""class="form-control" name="memo"></textarea>
-  <input type="file" name="file_1" class="form-control">
+  <input type="file" name="ori_name" class="form-control">
   <input type="file" name="file_2" class="form-control">
   <h5><label for="visit" style="color: gray;"><input type="checkbox" value="1" name="visit" id="visit">방문했던 곳이예요.</label></h5>
    <div>별점매기기</div>

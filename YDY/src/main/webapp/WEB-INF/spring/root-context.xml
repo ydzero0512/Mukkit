@@ -74,11 +74,10 @@
      
      
      </bean>
-		
-	 <!-- SqlSessionTemplate : 디비연결,mybatis설정,mapper설정(SQL실행),DB종료 -->	
 	 
 	 <context:component-scan base-package="com.ydy.service"/>
 	 <context:component-scan base-package="com.ydy.persistence"/>
 	 
+
 		
 </beans>

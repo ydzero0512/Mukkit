@@ -13,10 +13,12 @@
   	
   	<insert id="create">
   		INSERT INTO restaurant
-  		VALUES (null,#{rest_name},#{address_road},#{address},#{city},#{lat},#{lng},#{fav},#{visit},#{memo},#{file_1},#{file_2})
+  		VALUES (null,#{rest_name},#{address_road},#{address},#{city},#{lat},#{lng},#{fav},#{visit},#{memo},#{ori_name},#{change_name})
   	
   	</insert>
   	<!-- 글쓰기 -->
+  	
+
   	
 
   </mapper>
