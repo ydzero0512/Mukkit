@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <%@include file="../common/head.jsp" %>
 <meta charset="UTF-8">
 <title>먹킷리스트</title>
@@ -12,13 +13,30 @@ tr{padding-bottom: 10px;}
 td{height: 50px;vertical-align: middle;}
 .check{transform: scale(1.3);}
 tr{cursor: pointer;}
+#searchBox{width: 280px;border-radius: 5px;box-shadow: -2px 5px 10px 1px rgba(0,0,0,.15);height: 34px;padding: 5px; margin-bottom: 30px;}
+.page-link{border-radius: 2px !important;}
+.page-item{ margin: 0.5em;}
+.icon-star{color: #f73c32 !important;}
+.icon-star-empty{color: #f73c32 !important;}
 </style>
 </head>
 <body>
 <%@include file="../common/nav.jsp" %>
 <!-- 페이징처리 .. where절에 city like '부산'이런식으로 해서 링크에 파라미터 걸어주고,받는걸로. (검색이랑 비슷한원리!) -->
 <h3 style="text-align: center;margin-top: 50px;">먹킷리스트😋</h3>
-<div style="width: 900px;margin: auto;margin-top:50px;background: white;padding: 20px;border-radius: 0 0 40px 0;width: 60%; border: 5px solid;height: 500px;">	
+
+
+
+
+<div style="width: 900px;margin: auto;margin-top:50px;background: white;margin-bottom:100px; padding: 20px;border-radius: 0 0 40px 0;width: 60%; border: 5px solid;height: 500px;">	
+	
+	<form>
+	<div id="searchBox">
+	<input type="text" placeholder="검색어를 입력하세요" style="border: none;width: 150px;"id="search" name="search" value="${pm.pageVO.search }">
+	<button style="border: none;background: white;margin-left: 85px;"><i class="icon-search"></i></button>
+	</div>
+	</form>
+	
 	<table class="table table-hover" style="">
 	  <thead>
 	  <tr>
@@ -48,7 +66,55 @@ tr{cursor: pointer;}
 	   	</c:otherwise>
 	   	</c:choose>
 	   	
+	   	<c:choose>
+	   	<c:when test="${vo.fav == 1 }">
+	   	<td>
+		   	<i class="icon-star"></i>
+		   	<c:forEach begin="0" end="3">
+		   		<i class="icon-star-empty"></i>
+		   	</c:forEach>
+	   	</td>
+	   	</c:when>
+	   	<c:when test="${vo.fav == 2 }">
+	   	<td>
+		   	<c:forEach begin="0" end="1">
+		   		<i class="icon-star"></i>
+		   	</c:forEach>
+		   	<c:forEach begin="0" end="2">
+		   		<i class="icon-star-empty"></i>
+		   	</c:forEach>
+	   	</td>
+	   	</c:when>
+	   	<c:when test="${vo.fav == 3 }">
+	   	<td>
+		   	<c:forEach begin="0" end="2">
+		   		<i class="icon-star"></i>
+		   	</c:forEach>
+		   	<c:forEach begin="0" end="1">
+		   		<i class="icon-star-empty"></i>
+		   	</c:forEach>
+	   	</td>
+	   	</c:when>
+	   	<c:when test="${vo.fav == 4 }">
+	   	<td>
+		    <c:forEach begin="0" end="3">
+		   		<i class="icon-star"></i>
+		   	</c:forEach>
+		   	<i class="icon-star-empty"></i>
+	   	</td>
+	   	</c:when>
+	   	<c:when test="${vo.fav == 5 }">
+	   	<td>
+	   		<c:forEach begin="0" end="4">
+		   		<i class="icon-star"></i>
+		   	</c:forEach>
+	   	</td>
+	   	</c:when>
+	   	<c:otherwise>
 	   	<td></td>
+	   	</c:otherwise>		   		   		   	
+	   	</c:choose>
+	   	
 	  </tr>
 	  
 	  </c:forEach>
@@ -56,7 +122,22 @@ tr{cursor: pointer;}
 	</table>
 	<input type="button" class="btn btn-danger" onclick="deleteList();" value="삭제">
 	
+					<div>
+					<ul class="pagination" style="justify-content: center;">
+						<c:if test="${pm.prev }">
+						<li class="page-item"><a class="page-link" href="/yummy/restList2?page=${pm.startPage -1}">이전</a></li>
+						</c:if>
+						<c:forEach begin="${pm.startPage }" end="${pm.endPage }" step="1" var="i" >
+						<li class="page-item ${pm.pageVO.page == i?'active':''}"><a class="page-link" href="/yummy/restList2?page=${i}&search=${pm.pageVO.search}">${i }</a></li>
+						</c:forEach>
+						<c:if test="${pm.next && pm.endPage > 0 }">
+						<li class="page-item"><a class="page-link" href="/yummy/restList2?page=${pm.endPage+1 }">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+	
 	<script type="text/javascript">
+
 	 function selectAll(selectAll)  {
 		  const checkboxes 
 		       = document.getElementsByName('rowCheck');
@@ -75,7 +156,7 @@ tr{cursor: pointer;}
 			if(list[i].checked){
 			valArr.push(list[i].value);
 		  }	
-		}
+		}//체크박스 체크 된 것만 배열에 넣기
 
 		if(valArr.length == 0){
 	    	Swal.fire("선택된 목록이 없습니다.")

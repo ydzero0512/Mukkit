@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.ydy.domain.PageVO;
 import com.ydy.domain.RestVO;
 import com.ydy.persistence.RestDAO;
 
@@ -38,6 +38,30 @@ public class RestServiceImpl implements RestService{
 	@Override
 	public void deleteList(String rest_id) throws Exception {
 		rdao.deleteList(rest_id);
+		
+	}
+
+	@Override
+	public List<RestVO> readBoardList(Integer page) throws Exception {
+	
+		return rdao.readBoardList(page);
+	}
+
+	@Override
+	public List<RestVO> getBoardListPage(PageVO vo) throws Exception {
+		
+		return rdao.getBoardListPage(vo);
+	}
+
+	@Override
+	public int getTotalCount(PageVO vo) throws Exception {
+		
+		return rdao.getTotalCount(vo);
+	}
+
+	@Override
+	public void updateList(RestVO vo) throws Exception {
+		rdao.updateList(vo);
 		
 	}
 

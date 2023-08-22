@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import com.ydy.domain.PageVO;
 import com.ydy.domain.RestVO;
 
 
@@ -33,8 +33,35 @@ public class RestDAOImpl implements RestDAO {
 	@Override
 	public List<RestVO> selectRest() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+".getList");
+		return sqlSession.selectList(NAMESPACE+".getMapList");
 	}
+
+	@Override
+	public List<RestVO> readBoardList(Integer page) throws Exception {
+		logger.debug("  readBoardListPage(Integer page) 호출!");
+		
+		if(page<=0) {
+			page=1;
+		} //페이지에 따른 위치 인덱스 계산
+		// page=1 -> 0번부터 2-> 10번부터 3->20번부터 
+		page = (page - 1)*10;
+		
+		return sqlSession.selectList(NAMESPACE+".getList",page);
+	}
+
+	@Override
+	public List<RestVO> getBoardListPage(PageVO vo) throws Exception {
+		logger.debug("  getBoardListPage(PageVO vo) 호출!");
+		
+		return sqlSession.selectList(NAMESPACE+".getList",vo);
+	}
+
+	@Override
+	public int getTotalCount(PageVO vo) throws Exception {
+		logger.debug("  getTotalCount() 호출!");
+		return sqlSession.selectOne(NAMESPACE+".totalCnt",vo);
+	}
+	
 
 	@Override
 	public RestVO selectRead(String rest_id) throws Exception {
@@ -46,6 +73,13 @@ public class RestDAOImpl implements RestDAO {
 	public void deleteList(String rest_id) throws Exception {
 		logger.debug("deleteList(String rest_id) 호출!");
 		sqlSession.delete(NAMESPACE+".deleteList",rest_id);
+		
+	}
+
+	@Override
+	public void updateList(RestVO vo) throws Exception {
+		logger.debug("updateList(Integer rest_id) 호출!");
+		sqlSession.update(NAMESPACE+".updateList",vo);
 		
 	}
 	

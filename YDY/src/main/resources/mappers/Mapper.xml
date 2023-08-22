@@ -4,10 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.ydy.mapper.RestMapper">
-  	
-	<select id="getList" resultType="RestVO">
+	
+	<!-- 맵리스트 -->
+	<select id="getMapList" resultType="RestVO">
 		SELECT * FROM restaurant
 	</select>
+	<!-- 맵리스트 -->
 	
 	<!-- 특정글 정보  -->
 	<select id="getRead" resultType="RestVO">
@@ -31,6 +33,32 @@
   		WHERE rest_id = #{rest_id}
   	</delete>
   	<!-- 글삭제  -->
+  	
+  	<!-- 글목록조회 -->
+  		<select id="getList" resultType="RestVO" parameterType="PageVO">
+  		 
+ 		SELECT * FROM restaurant	
+ 		where rest_id > 0
+ 		<if test="search!=''">AND rest_name LIKE CONCAT('%', #{search}, '%')</if>
+ 		order by rest_id desc
+ 		limit #{startPage},#{pageSize}
+ 		
+  	</select>
+  	<!-- 글목록조회 -->
+  	
+  	<!-- 전체 글 개수계산 -->
+  	<select id="totalCnt" resultType="int" parameterType="PageVO">
+  		select count(*) from restaurant
+  		<if test="search!=''">WHERE rest_name LIKE CONCAT('%', #{search}, '%')</if>
+  	</select>
+  	<!-- 전체 글 개수계산 -->
+  	
+  	<!-- 글수정 -->
+  	<update id="updateList">
+  		UPDATE restaurant SET memo = #{memo}, visit = #{visit}, fav = #{fav}, file = #{file_name}
+  		WHERE rest_id = #{rest_id}
+  	</update>
+  	<!-- 글수정 -->
   	
 
   	
