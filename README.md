@@ -12,9 +12,11 @@
 * MySQL
 * Apache Tomcat
 ## 📃주요기능
-* 검색한 식당의 tilte,좌표정보 가져와서 DB에 저장
+* 검색한 식당의 tilte,좌표정보 가져옴
 * 식당이름 검색 후, 해당 장소 좌표정보 -> 주소로 바꿈
-'print(" '''getAddr(lat,lng);
+  
+```javascript
+             getAddr(lat,lng);
             	function getAddr(lat,lng){
             	    let geocoder = new kakao.maps.services.Geocoder();
             	    let coord = new kakao.maps.LatLng(lat, lng);
@@ -33,6 +35,12 @@
             	document.getElementById("lng").value = lng;
             	document.getElementById("lat").value = lat;
             	window.parent.closeModal()
-              };''' ")'
+              };
+* 지역 카테고리 클릭 시, 그 지역의 맛집 불러오기
+* 별점 매기기 기능
+* 페이징
+* 체크박스 다중 삭제기능
+* 필터링(검색) 기능
+* 카카오 Open API 이용한 공유하기 기능
 
   
