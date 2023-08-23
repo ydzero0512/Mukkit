@@ -14,7 +14,7 @@
 ## 📃주요기능
 * 검색한 식당의 tilte,좌표정보 가져와서 DB에 저장
 * 식당이름 검색 후, 해당 장소 좌표정보 -> 주소로 바꿈
-console.log(" '''getAddr(lat,lng);
+'print(" '''getAddr(lat,lng);
             	function getAddr(lat,lng){
             	    let geocoder = new kakao.maps.services.Geocoder();
             	    let coord = new kakao.maps.LatLng(lat, lng);
@@ -33,6 +33,6 @@ console.log(" '''getAddr(lat,lng);
             	document.getElementById("lng").value = lng;
             	document.getElementById("lat").value = lat;
             	window.parent.closeModal()
-              '''};")
+              };''' ")'
 
   
