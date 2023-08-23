@@ -12,11 +12,11 @@
 * MySQL
 * Apache Tomcat
 ## 📃주요기능
-'console.log("//마커의 좌표를 주소로 변환
-            	getAddr(lat,lng);
+* 검색한 식당의 tilte,좌표정보 가져와서 DB에 저장
+* 식당이름 검색 후, 해당 장소 좌표정보 -> 주소로 바꿈
+'console.log("     getAddr(lat,lng);
             	function getAddr(lat,lng){
             	    let geocoder = new kakao.maps.services.Geocoder();
-
             	    let coord = new kakao.maps.LatLng(lat, lng);
             	    let callback = function(result, status) {
             	        if (status === kakao.maps.services.Status.OK) {
