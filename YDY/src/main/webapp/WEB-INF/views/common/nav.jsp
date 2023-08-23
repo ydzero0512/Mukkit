@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="javascript:void(0)">먹킷</a>
+    <a class="navbar-brand" href="javascript:void(0)"><img alt="" src="/resources/mukkittt.png" style="height: 55px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -67,7 +67,7 @@
 <div class="container mt-3" style=" border-radius: 0 0 40px 0;width: 60%; border: 5px solid;background: white;	padding:40px;margin-bottom: 50px;">
 	<h5 style="direction: rtl;margin-right: 60px;">
 		<a id="kakaotalk-sharing-btn" href="javascript:shareMessage()" style="text-decoration: none;">
-		<span style="color: #4A3F14;">공유하기</span> <i class="icon-comment" style="color: #978155;"></i>
+		<span style="color: #4A3F14;">공유하기</span> <i class="icon-comment" style="color: #4A3F14;"></i>
 		</a>
 	</h5>
 <!-- 지도 -->
@@ -78,6 +78,7 @@
 	 ${vo.memo }<br>
 	
 	<c:if test="${!empty vo.file_name}">
+	 <hr>
 	 <img src="/resources/photo/${vo.file_name}">
 	</c:if>
 	</div>

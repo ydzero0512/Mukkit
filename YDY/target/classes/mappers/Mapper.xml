@@ -55,7 +55,7 @@
   	
   	<!-- 글수정 -->
   	<update id="updateList">
-  		UPDATE restaurant SET memo = #{memo}, visit = #{visit}, fav = #{fav}, file = #{file_name}
+  		UPDATE restaurant SET memo = #{memo}, visit = #{visit}, fav = #{fav}, file_name = #{file_name}
   		WHERE rest_id = #{rest_id}
   	</update>
   	<!-- 글수정 -->
